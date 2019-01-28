@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Major+Mono+Display');
+
+$sky-blue: #add5f2;
+$off-white: #e5e5e5;
+
+body {
+  font-family: 'Major Mono Display', monospace;
+  height: 100vh;
+  background-image: linear-gradient($sky-blue, $off-white);
+}
+
+.mountains {
+  width: 100%;
+  height: 50vh;
+}

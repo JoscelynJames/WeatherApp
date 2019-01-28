@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-
+import DayMountains from './Mountains/DayMountains.js'
 class MobileView extends Component {
   render() {
-    return <div>Mobile View Component</div>
+    return <DayMountains />
   }
 }
 

@@ -13,7 +13,9 @@ class Calendar extends Component {
       latitude: 0,
       longitude: 0,
       accessGranted: false,
-      loading: true
+      loading: true,
+      forecast: {},
+      error: false
     }
   }
 
@@ -23,7 +25,6 @@ class Calendar extends Component {
       const permissions = await navigator.permissions.query({
         name: 'geolocation'
       })
-
       switch (permissions.state) {
         case 'denied':
           this.geolocationDenied()
@@ -49,7 +50,25 @@ class Calendar extends Component {
         accessGranted: true,
         loading: false
       })
+      this.fetchLocationInfo()
     })
+  }
+
+  async fetchLocationInfo() {
+    try {
+      const response = await fetch(
+        process.env.REACT_APP_DARK_SKY_API +
+          'forecast/' +
+          this.state.latitude +
+          ',' +
+          this.state.longitude
+      )
+      const forecast = await response.json()
+      this.setState({ forecast })
+    } catch (error) {
+      console.log(error)
+      this.setState({ error })
+    }
   }
 
   render() {
