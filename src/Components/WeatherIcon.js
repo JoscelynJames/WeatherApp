@@ -10,6 +10,7 @@ import Sun from '../images/Sun.svg'
 class WeatherIcon extends Component {
   constructor(props) {
     super(props)
+    console.log(props)
   }
 
   getIcon(icon) {
@@ -22,6 +23,8 @@ class WeatherIcon extends Component {
         return PartlyCloudy
       case 'clear-day':
         return Cloud
+      case 'clear-night':
+        return Moon
       default:
         return Sun
     }

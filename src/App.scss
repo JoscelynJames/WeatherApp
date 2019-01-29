@@ -29,3 +29,26 @@ body {
   top: 20px;
   right: 40px;
 }
+
+// WeekView Component sytles
+
+.week-view-container {
+  table {
+    width: 100%;
+
+    tr {
+      height: 50px;
+    }
+
+    able,
+    th,
+    td {
+      // border-top: 1px solid white;
+      border-bottom: 1px solid white;
+    }
+
+    .day-of-week {
+      text-align: inherit;
+    }
+  }
+}

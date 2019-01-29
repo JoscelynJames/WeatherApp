@@ -35,6 +35,7 @@ class MobileView extends Component {
   setTempData() {
     const temp = this.props.forecast.currently.temperature.toFixed(0)
     const icon = this.props.forecast.currently.icon
+    console.log(icon)
     this.setState({ temp, icon })
   }
 
