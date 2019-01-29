@@ -47,8 +47,7 @@ class Calendar extends Component {
       this.setState({
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
-        accessGranted: true,
-        loading: false
+        accessGranted: true
       })
       this.fetchLocationInfo()
     })
@@ -56,15 +55,20 @@ class Calendar extends Component {
 
   async fetchLocationInfo() {
     try {
-      const response = await fetch(
+      const darkSkyResponse = await fetch(
         process.env.REACT_APP_DARK_SKY_API +
           'forecast/' +
           this.state.latitude +
           ',' +
           this.state.longitude
       )
-      const forecast = await response.json()
-      this.setState({ forecast })
+      const forecast = await darkSkyResponse.json()
+
+      this.setState({
+        ...this.state,
+        forecast,
+        loading: false
+      })
     } catch (error) {
       console.log(error)
       this.setState({ error })
@@ -80,7 +84,10 @@ class Calendar extends Component {
       <Media query="(max-width: 599px)">
         {matches =>
           matches ? (
-            <MobileView accessGranted={this.state.accessGranted} />
+            <MobileView
+              accessGranted={this.state.accessGranted}
+              forecast={this.state.forecast}
+            />
           ) : (
             <DesktopView accessGranted={this.state.accessGranted} />
           )
@@ -89,5 +96,14 @@ class Calendar extends Component {
     )
   }
 }
+
+// export interface StateInterface {
+//   latitude: Number,
+//   longitude: Number,
+//   accessGranted: Boolean,
+//   loading: Boolean,
+//   forecast: Object,
+//   error: Boolean
+// }
 
 export default Calendar
