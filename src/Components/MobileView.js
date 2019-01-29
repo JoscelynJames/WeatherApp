@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 //
-import DayMountains from './Mountains/DayMountains'
+// import DayMountains from './Mountains/DayMountains'
+// import NightMountains from './Mountains/NightMountains'
 import Banner from './Banner'
 import WeekView from './WeekView'
 import WeatherIcon from './WeatherIcon'
+import Mountains from './Mountains'
 
 class MobileView extends Component {
   constructor(props) {
@@ -35,14 +37,14 @@ class MobileView extends Component {
   setTempData() {
     const temp = this.props.forecast.currently.temperature.toFixed(0)
     const icon = this.props.forecast.currently.icon
-    console.log(icon)
     this.setState({ temp, icon })
   }
 
   render() {
     return (
       <div>
-        <DayMountains />
+        {/* {this.props.dayTime ? <DayMountains /> : <NightMountains />} */}
+        <Mountains isDay={this.props.dayTime} />
         <WeatherIcon icon={this.state.icon} />
         <Banner name={this.state.name} temp={this.state.temp} />
         <WeekView weeklyForecast={this.props.forecast.daily.data} />

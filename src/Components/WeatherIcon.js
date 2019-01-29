@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Snowflake from '../images/Snowflake.svg'
+// import Snowflake from '../images/Snowflake.svg'
 import Snowing from '../images/Snowing.svg'
 import Cloud from '../images/Cloud.svg'
 import PartlyCloudy from '../images/Cloudy.svg'
@@ -8,11 +8,6 @@ import Rain from '../images/rain.svg'
 import Sun from '../images/Sun.svg'
 
 class WeatherIcon extends Component {
-  constructor(props) {
-    super(props)
-    console.log(props)
-  }
-
   getIcon(icon) {
     switch (icon) {
       case 'snow':

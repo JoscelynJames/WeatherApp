@@ -15,11 +15,19 @@ class Calendar extends Component {
       accessGranted: false,
       loading: true,
       forecast: {},
-      error: false
+      error: false,
+      dayTime: true
     }
   }
 
   async componentDidMount() {
+    const currentTime = new Date()
+    if (currentTime.getHours() > 18) {
+      this.setState({ ...this.state, dayTime: false })
+      document.body.classList.add('night')
+    } else {
+      document.body.classList.add('day')
+    }
     // check if geolocation is available.
     if (navigator.permissions) {
       const permissions = await navigator.permissions.query({
@@ -33,18 +41,19 @@ class Calendar extends Component {
           this.getLocation()
           break
         default:
-          this.setState({ loading: true })
+          this.setState({ ...this.state, loading: true })
       }
     }
   }
 
   geolocationDenied() {
-    this.setState({ accessGranted: false, loading: false })
+    this.setState({ ...this.state, accessGranted: false, loading: false })
   }
 
   getLocation() {
     navigator.geolocation.getCurrentPosition(position => {
       this.setState({
+        ...this.state,
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
         accessGranted: true
@@ -87,6 +96,7 @@ class Calendar extends Component {
             <MobileView
               accessGranted={this.state.accessGranted}
               forecast={this.state.forecast}
+              dayTime={this.state.dayTime}
             />
           ) : (
             <DesktopView accessGranted={this.state.accessGranted} />

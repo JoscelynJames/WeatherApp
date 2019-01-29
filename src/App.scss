@@ -1,15 +1,43 @@
 @import url('https://fonts.googleapis.com/css?family=Major+Mono+Display');
 
 $sky-blue: #add5f2;
+$night-sky: #0a263a;
 $off-white: #e5e5e5;
 $main-font-color: #4b4a4a;
 
 body {
   font-family: 'Major Mono Display', monospace;
   height: 100vh;
-  background-image: linear-gradient($sky-blue, $off-white);
   color: $main-font-color;
   margin: 0px;
+}
+
+.day {
+  background-image: linear-gradient($sky-blue, $off-white);
+
+  .banner {
+    box-shadow: 0px 0px 18px 0px #92bad6;
+  }
+
+  th,
+  td {
+    // border-bottom: 1px solid white;
+  }
+}
+
+.night {
+  background-image: linear-gradient($night-sky, $off-white);
+
+  // Night Banner Component CSS
+  .banner {
+    box-shadow: 0px 0px 18px 0px #153349;
+  }
+
+  // Night Weekly View Table Component
+  th,
+  td {
+    // border-bottom: 1px solid black;
+  }
 }
 
 .mountains {
@@ -21,7 +49,6 @@ body {
   display: flex;
   justify-content: space-between;
   padding: 0px 10px;
-  box-shadow: 0px 0px 18px 0px #92bad6;
 }
 
 .weather-icon {
@@ -30,25 +57,19 @@ body {
   right: 40px;
 }
 
-// WeekView Component sytles
+// WeekView Component styles
 
 .week-view-container {
   table {
     width: 100%;
 
     tr {
-      height: 50px;
-    }
-
-    able,
-    th,
-    td {
-      // border-top: 1px solid white;
-      border-bottom: 1px solid white;
+      height: 60px;
     }
 
     .day-of-week {
       text-align: inherit;
+      padding-left: 15px;
     }
   }
 }
