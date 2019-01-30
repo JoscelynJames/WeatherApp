@@ -3,25 +3,22 @@
 $sky-blue: #add5f2;
 $night-sky: #0a263a;
 $off-white: #e5e5e5;
-$main-font-color: #4b4a4a;
 
 body {
   font-family: 'Major Mono Display', monospace;
-  height: 100vh;
-  color: $main-font-color;
+  height: 100%;
   margin: 0px;
 }
 
 .day {
+  body {
+    height: 100%;
+  }
+
   background-image: linear-gradient($sky-blue, $off-white);
 
   .banner {
     box-shadow: 0px 0px 18px 0px #92bad6;
-  }
-
-  th,
-  td {
-    // border-bottom: 1px solid white;
   }
 }
 
@@ -32,17 +29,11 @@ body {
   .banner {
     box-shadow: 0px 0px 18px 0px #153349;
   }
-
-  // Night Weekly View Table Component
-  th,
-  td {
-    // border-bottom: 1px solid black;
-  }
 }
 
 .mountains {
   width: 100%;
-  padding: 100px 0px 8px 0px;
+  padding: 125px 0px 8px 0px;
 }
 
 .banner {
@@ -58,10 +49,10 @@ body {
 }
 
 // WeekView Component styles
-
 .week-view-container {
   table {
     width: 100%;
+    height: 100%;
 
     tr {
       height: 60px;
@@ -70,6 +61,17 @@ body {
     .day-of-week {
       text-align: inherit;
       padding-left: 15px;
+      width: 80%;
     }
+  }
+
+  .hide-day-info {
+    // visibility: hidden;
+    display: none;
+  }
+
+  .show-day-info {
+    // visibility: visible;
+    display: inherit;
   }
 }
