@@ -16,14 +16,14 @@ class Calendar extends Component {
       loading: true,
       forecast: {},
       error: false,
-      dayTime: true
+      isDay: true
     }
   }
 
   async componentDidMount() {
     const currentTime = new Date()
     if (currentTime.getHours() > 18) {
-      this.setState({ ...this.state, dayTime: false })
+      this.setState({ ...this.state, isDay: false })
       document.body.classList.add('night')
     } else {
       document.body.classList.add('day')
@@ -79,7 +79,7 @@ class Calendar extends Component {
         loading: false
       })
     } catch (error) {
-      console.log(error)
+      console.error(error)
       this.setState({ error })
     }
   }
@@ -96,7 +96,7 @@ class Calendar extends Component {
             <MobileView
               accessGranted={this.state.accessGranted}
               forecast={this.state.forecast}
-              dayTime={this.state.dayTime}
+              isDay={this.state.isDay}
             />
           ) : (
             <DesktopView accessGranted={this.state.accessGranted} />
@@ -106,14 +106,5 @@ class Calendar extends Component {
     )
   }
 }
-
-// export interface StateInterface {
-//   latitude: Number,
-//   longitude: Number,
-//   accessGranted: Boolean,
-//   loading: Boolean,
-//   forecast: Object,
-//   error: Boolean
-// }
 
 export default Calendar
