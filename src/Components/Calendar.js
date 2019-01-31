@@ -5,6 +5,8 @@ import MobileView from './MobileView'
 import DesktopView from './DesktopView'
 import Loading from './Loading'
 
+import { getHourOfDayFromEpoch } from '../Helpers/dateTime'
+
 class Calendar extends Component {
   constructor() {
     super()
@@ -15,19 +17,18 @@ class Calendar extends Component {
       accessGranted: false,
       loading: true,
       forecast: {},
-      error: false,
       isDay: true
     }
   }
 
   async componentDidMount() {
-    const currentTime = new Date()
-    if (currentTime.getHours() > 18) {
-      this.setState({ ...this.state, isDay: false })
-      document.body.classList.add('night')
-    } else {
-      document.body.classList.add('day')
-    }
+    // const currentTime = new Date()
+    // if (currentTime.getHours() > 18) {
+    //   this.setState({ ...this.state, isDay: false })
+    //   document.body.classList.add('night')
+    // } else {
+    //   document.body.classList.add('day')
+    // }
     // check if geolocation is available.
     if (navigator.permissions) {
       const permissions = await navigator.permissions.query({
@@ -78,15 +79,32 @@ class Calendar extends Component {
         forecast,
         loading: false
       })
+
+      this.setTimeOfDay()
     } catch (error) {
       console.error(error)
-      this.setState({ error })
+    }
+  }
+
+  setTimeOfDay() {
+    // prettier-ignore
+    const hourSunsets = getHourOfDayFromEpoch(this.state.forecast.daily.data[0].sunsetTime).replace(/\D/g, '')
+    // prettier-ignore
+    const hourSunrises = getHourOfDayFromEpoch(this.state.forecast.daily.data[0].sunriseTime).replace(/\D/g, '')
+    // prettier-ignore
+    const currentHour = getHourOfDayFromEpoch(new Date(), false).replace(/\D/g, '')
+
+    if (currentHour >= hourSunsets || currentHour <= hourSunrises) {
+      this.setState({ ...this.state, isDay: false })
+      document.body.classList.add('night')
+    } else {
+      document.body.classList.add('day')
     }
   }
 
   render() {
     return this.state.loading ? (
-      <div>
+      <div className="loading-container">
         <Loading />
       </div>
     ) : (
@@ -96,6 +114,7 @@ class Calendar extends Component {
             <MobileView
               accessGranted={this.state.accessGranted}
               forecast={this.state.forecast}
+              latLong={this.state.latitude + ',' + this.state.longitude}
               isDay={this.state.isDay}
             />
           ) : (

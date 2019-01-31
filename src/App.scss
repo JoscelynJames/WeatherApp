@@ -48,6 +48,17 @@ body {
   right: 40px;
 }
 
+.hourly-icon {
+  img {
+    width: 40px;
+  }
+}
+
+.loading-container {
+  height: 100vh;
+  color: $off-white;
+}
+
 // WeekView Component styles
 .week-view-container {
   table {
@@ -73,5 +84,31 @@ body {
   .show-day-info {
     // visibility: visible;
     display: inherit;
+    th {
+      height: 100px;
+    }
+  }
+
+  .hourly-container {
+    display: flex;
+    overflow: scroll;
+    width: 300px;
+
+    .hourly-report {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sunrise,
+    .sunset {
+      font-size: 10px;
+    }
+
+    .hour {
+      font-size: 12px;
+      width: 70px;
+    }
   }
 }
