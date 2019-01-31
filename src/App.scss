@@ -98,7 +98,6 @@ body {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: space-between;
     }
 
     .sunrise,
@@ -106,9 +105,15 @@ body {
       font-size: 10px;
     }
 
+    .temp {
+      font-size: 10px;
+      margin: 0;
+    }
+
     .hour {
       font-size: 12px;
       width: 70px;
+      margin-top: 25px;
     }
   }
 }

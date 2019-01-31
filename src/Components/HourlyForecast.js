@@ -16,6 +16,7 @@ const HourlyForecast = ({ forecast, sunrise, sunset }) => {
             {isSunsetTime(hour.time, sunset) ? (
               <p className="sunset">sunset</p>
             ) : null}
+            <p className="temp">{hour.temperature.toFixed(0)}°</p>
             <p className="hour">{getHourOfDayFromEpoch(hour.time)}</p>
           </div>
         )

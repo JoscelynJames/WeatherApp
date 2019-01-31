@@ -20,7 +20,6 @@ class MobileView extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
     this.setName()
     this.setTempData()
   }

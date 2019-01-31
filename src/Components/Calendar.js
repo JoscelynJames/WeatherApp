@@ -5,7 +5,7 @@ import MobileView from './MobileView'
 import DesktopView from './DesktopView'
 import Loading from './Loading'
 
-import { getHourOfDayFromEpoch } from '../Helpers/dateTime'
+import { getDateFromEpoch } from '../Helpers/dateTime'
 
 class Calendar extends Component {
   constructor() {
@@ -22,14 +22,6 @@ class Calendar extends Component {
   }
 
   async componentDidMount() {
-    // const currentTime = new Date()
-    // if (currentTime.getHours() > 18) {
-    //   this.setState({ ...this.state, isDay: false })
-    //   document.body.classList.add('night')
-    // } else {
-    //   document.body.classList.add('day')
-    // }
-    // check if geolocation is available.
     if (navigator.permissions) {
       const permissions = await navigator.permissions.query({
         name: 'geolocation'
@@ -88,17 +80,17 @@ class Calendar extends Component {
 
   setTimeOfDay() {
     // prettier-ignore
-    const hourSunsets = getHourOfDayFromEpoch(this.state.forecast.daily.data[0].sunsetTime).replace(/\D/g, '')
+    const hourSunsets = getDateFromEpoch(this.state.forecast.daily.data[0].sunsetTime).getHours()
     // prettier-ignore
-    const hourSunrises = getHourOfDayFromEpoch(this.state.forecast.daily.data[0].sunriseTime).replace(/\D/g, '')
+    const hourSunrises = getDateFromEpoch(this.state.forecast.daily.data[0].sunriseTime).getHours()
     // prettier-ignore
-    const currentHour = getHourOfDayFromEpoch(new Date(), false).replace(/\D/g, '')
+    const currentHour = new Date().getHours()
 
-    if (currentHour >= hourSunsets || currentHour <= hourSunrises) {
+    if (currentHour >= hourSunrises) {
       this.setState({ ...this.state, isDay: false })
-      document.body.classList.add('night')
-    } else {
       document.body.classList.add('day')
+    } else if (currentHour >= hourSunsets) {
+      document.body.classList.add('night')
     }
   }
 

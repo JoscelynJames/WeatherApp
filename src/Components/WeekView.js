@@ -30,7 +30,7 @@ class WeekView extends Component {
     })
   }
 
-  handleClick = (e, epochTimeStamp, latLong) => {
+  handleClick = (e, epochTimeStamp) => {
     this.setState({ hourlyForecast: {} })
     this.getHourlyForecast(epochTimeStamp, this.props.latLong)
     // check for any nodes that are already expanded
@@ -59,11 +59,7 @@ class WeekView extends Component {
             const date = getDateFromEpoch(day.time)
             return (
               <tbody key={day.time}>
-                <tr
-                  onClick={e =>
-                    this.handleClick(e, day.time, this.props.latLong)
-                  }
-                >
+                <tr onClick={e => this.handleClick(e, day.time)}>
                   <th className={i + ' day-of-week'}>{getDayOfWeek(date)}</th>
                   <th>{day.temperatureMax.toFixed(0)}°</th>
                 </tr>
