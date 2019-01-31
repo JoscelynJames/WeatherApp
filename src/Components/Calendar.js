@@ -105,7 +105,7 @@ class Calendar extends Component {
   render() {
     return this.state.loading ? (
       <div className="loading-container">
-        <Loading />
+        <Loading message="Loading... Check your location settings if this screen persist." />
       </div>
     ) : (
       <Media query="(max-width: 599px)">

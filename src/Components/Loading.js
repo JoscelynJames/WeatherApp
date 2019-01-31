@@ -1,7 +1,7 @@
 import React from 'react'
 
-const Loading = () => {
-  return <div>Loading... Check you locations settings</div>
+const Loading = ({ message }) => {
+  return <div>{message}</div>
 }
 
 export default Loading

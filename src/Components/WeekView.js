@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import HourlyForecast from './HourlyForecast'
+import Loading from './Loading'
 import { getDateFromEpoch, getDayOfWeek } from '../Helpers/dateTime'
 class WeekView extends Component {
   constructor(props) {
@@ -30,6 +31,7 @@ class WeekView extends Component {
   }
 
   handleClick = (e, epochTimeStamp, latLong) => {
+    this.setState({ hourlyForecast: {} })
     this.getHourlyForecast(epochTimeStamp, this.props.latLong)
     // check for any nodes that are already expanded
     // we will want to collapse them before opening another
@@ -73,7 +75,9 @@ class WeekView extends Component {
                         sunset={this.state.sunset}
                         sunrise={this.state.sunrise}
                       />
-                    ) : null}
+                    ) : (
+                      <Loading message="Loading your hourly forecast..." />
+                    )}
                   </th>
                 </tr>
               </tbody>

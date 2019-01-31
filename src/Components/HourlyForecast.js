@@ -26,13 +26,13 @@ const HourlyForecast = ({ forecast, sunrise, sunset }) => {
 
 const isSunriseTime = (currentTimeStamp, sunriseTimeStamp) => {
   return (
-    getHourOfDayFromEpoch(currentTimeStamp) ==
+    getHourOfDayFromEpoch(currentTimeStamp) ===
     getHourOfDayFromEpoch(sunriseTimeStamp)
   )
 }
 const isSunsetTime = (currentTimeStamp, sunsetTimeStamp) => {
   return (
-    getHourOfDayFromEpoch(currentTimeStamp) ==
+    getHourOfDayFromEpoch(currentTimeStamp) ===
     getHourOfDayFromEpoch(sunsetTimeStamp)
   )
 }
