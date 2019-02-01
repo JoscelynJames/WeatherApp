@@ -40,7 +40,7 @@ class Calendar extends Component {
   }
 
   geolocationDenied() {
-    this.setState({ ...this.state, accessGranted: false, loading: false })
+    this.setState({ ...this.state, accessGranted: false, loading: true })
   }
 
   getLocation() {
@@ -103,7 +103,7 @@ class Calendar extends Component {
         <Loading message="Loading... Check your location settings if this screen persist." />
       </div>
     ) : (
-      <Media query="(max-width: 599px)">
+      <Media query="(max-width: 780px)">
         {matches =>
           matches ? (
             <MobileView

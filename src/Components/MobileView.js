@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-//
-// import DayMountains from './Mountains/DayMountains'
-// import NightMountains from './Mountains/NightMountains'
+// Components
 import Banner from './Banner'
 import WeekView from './WeekView'
 import WeatherIcon from './WeatherIcon'

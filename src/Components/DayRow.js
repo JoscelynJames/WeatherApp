@@ -53,8 +53,8 @@ class DayRow extends Component {
         <tr onClick={e => this.handleClick(e, this.props.time)}>
           <th className={this.props.index + ' day-of-week pointer'}>
             {getDayOfWeek(date)}
+            <p>{this.props.temp}°</p>
           </th>
-          <th>{this.props.temp}°</th>
         </tr>
         <tr className={this.props.index + ' close'}>
           <th>
