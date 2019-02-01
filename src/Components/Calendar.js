@@ -87,9 +87,12 @@ class Calendar extends Component {
     const currentHour = new Date().getHours()
 
     if (currentHour >= hourSunrises) {
-      this.setState({ ...this.state, isDay: false })
+      this.setState({ ...this.state, isDay: true })
       document.body.classList.add('day')
-    } else if (currentHour >= hourSunsets) {
+    }
+
+    if (currentHour > hourSunsets || currentHour < hourSunrises) {
+      this.setState({ ...this.state, isDay: false })
       document.body.classList.add('night')
     }
   }

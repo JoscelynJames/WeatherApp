@@ -10,6 +10,7 @@ body {
   margin: 0px;
 }
 
+// Day Time Color Schema
 .day {
   body {
     height: 100%;
@@ -21,7 +22,9 @@ body {
     box-shadow: 0px 0px 18px 0px #92bad6;
   }
 }
+// End of Day Time Color Schema
 
+// Night Time Color Schema
 .night {
   background-image: linear-gradient($night-sky, $off-white);
 
@@ -29,6 +32,11 @@ body {
   .banner {
     box-shadow: 0px 0px 18px 0px #153349;
   }
+}
+// End of Night Time Color Schema
+
+.pointer {
+  cursor: pointer;
 }
 
 .mountains {
@@ -76,13 +84,11 @@ body {
     }
   }
 
-  .hide-day-info {
-    // visibility: hidden;
+  .close {
     display: none;
   }
 
-  .show-day-info {
-    // visibility: visible;
+  .open {
     display: inherit;
     th {
       height: 100px;
@@ -92,12 +98,13 @@ body {
   .hourly-container {
     display: flex;
     overflow: scroll;
-    width: 300px;
+    width: 80vw;
 
     .hourly-report {
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: space-between;
     }
 
     .sunrise,
@@ -107,13 +114,12 @@ body {
 
     .temp {
       font-size: 10px;
-      margin: 0;
+      margin: 4px 0px 0px 5px;
     }
 
     .hour {
       font-size: 12px;
       width: 70px;
-      margin-top: 25px;
     }
   }
 }
