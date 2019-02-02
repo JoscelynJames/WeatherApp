@@ -4,8 +4,10 @@ import Media from 'react-media'
 import MobileView from './MobileView'
 import DesktopView from './DesktopView'
 import Loading from './Loading'
+import SearchByZip from './SearchByZip'
 
 import { getDateFromEpoch } from '../Helpers/dateTime'
+import zipcodes from 'zipcodes'
 
 class Calendar extends Component {
   constructor() {
@@ -22,6 +24,7 @@ class Calendar extends Component {
   }
 
   async componentDidMount() {
+    console.log(this.props)
     if (navigator.permissions) {
       const permissions = await navigator.permissions.query({
         name: 'geolocation'
@@ -37,10 +40,23 @@ class Calendar extends Component {
           this.setState({ ...this.state, loading: true })
       }
     }
+
+    if (this.props.location.search) {
+      const zipcode = this.props.location.search.split('=')[1]
+      const { latitude, longitude } = zipcodes.lookup(zipcode)
+
+      this.setState({
+        accessGranted: true,
+        loading: true,
+        latitude,
+        longitude
+      })
+      this.fetchLocationInfo()
+    }
   }
 
   geolocationDenied() {
-    this.setState({ ...this.state, accessGranted: false, loading: true })
+    this.setState({ ...this.state, accessGranted: false, loading: false })
   }
 
   getLocation() {
@@ -102,7 +118,7 @@ class Calendar extends Component {
       <div className="loading-container">
         <Loading message="Loading... Check your location settings if this screen persist." />
       </div>
-    ) : (
+    ) : this.state.accessGranted ? (
       <Media query="(max-width: 780px)">
         {matches =>
           matches ? (
@@ -117,6 +133,8 @@ class Calendar extends Component {
           )
         }
       </Media>
+    ) : (
+      <SearchByZip />
     )
   }
 }

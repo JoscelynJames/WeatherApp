@@ -138,3 +138,29 @@ body {
     }
   }
 }
+
+.zip-container {
+  display: flex;
+  justify-content: center;
+  height: 80vh;
+  align-items: center;
+  flex-direction: column;
+
+  .zip-code-input {
+    border: 1px solid grey;
+    height: 50px;
+    width: 80vw;
+    border-radius: 8px;
+    font-size: 26px;
+    text-align: center;
+  }
+
+  .zip-code-submit {
+    font-size: 15px;
+    background: #f0f0f0;
+    font-variant: all-petite-caps;
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 10px 25px;
+  }
+}
