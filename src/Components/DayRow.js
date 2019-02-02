@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import HourlyForecast from './HourlyForecast'
 import Loading from './Loading'
 import { getDateFromEpoch, getDayOfWeek } from '../Helpers/dateTime'
+import { getDarSkyForecast } from '../Helpers/apiCalls'
 
 class DayRow extends Component {
   constructor(props) {
@@ -16,14 +17,7 @@ class DayRow extends Component {
 
   getHourlyForecast = async (epochTimeStamp, latLong) => {
     if (!this.state.hourlyForecast.data) {
-      const darkSkyResponse = await fetch(
-        process.env.REACT_APP_DARK_SKY_API +
-          'forecast/' +
-          latLong +
-          ',' +
-          epochTimeStamp
-      )
-      const forecast = await darkSkyResponse.json()
+      const forecast = await getDarSkyForecast(`${latLong},${epochTimeStamp}`)
 
       this.setState({
         hourlyForecast: forecast.hourly,

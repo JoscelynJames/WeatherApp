@@ -7,6 +7,7 @@ import Loading from './Loading'
 import SearchByZip from './SearchByZip'
 
 import { getDateFromEpoch } from '../Helpers/dateTime'
+import { getDarSkyForecast } from '../Helpers/apiCalls'
 import zipcodes from 'zipcodes'
 
 class Calendar extends Component {
@@ -24,7 +25,6 @@ class Calendar extends Component {
   }
 
   async componentDidMount() {
-    console.log(this.props)
     if (navigator.permissions) {
       const permissions = await navigator.permissions.query({
         name: 'geolocation'
@@ -72,26 +72,17 @@ class Calendar extends Component {
   }
 
   async fetchLocationInfo() {
-    try {
-      const darkSkyResponse = await fetch(
-        process.env.REACT_APP_DARK_SKY_API +
-          'forecast/' +
-          this.state.latitude +
-          ',' +
-          this.state.longitude
-      )
-      const forecast = await darkSkyResponse.json()
+    const forecast = await getDarSkyForecast(
+      `${this.state.latitude},${this.state.longitude}`
+    )
 
-      this.setState({
-        ...this.state,
-        forecast,
-        loading: false
-      })
+    this.setState({
+      ...this.state,
+      forecast,
+      loading: false
+    })
 
-      this.setTimeOfDay()
-    } catch (error) {
-      console.error(error)
-    }
+    this.setTimeOfDay()
   }
 
   setTimeOfDay() {
@@ -123,13 +114,14 @@ class Calendar extends Component {
         {matches =>
           matches ? (
             <MobileView
-              accessGranted={this.state.accessGranted}
               forecast={this.state.forecast}
               latLong={this.state.latitude + ',' + this.state.longitude}
-              isDay={this.state.isDay}
             />
           ) : (
-            <DesktopView accessGranted={this.state.accessGranted} />
+            <DesktopView
+              weeklyForecast={this.state.forecast.daily.data}
+              latLong={this.state.latitude + ',' + this.state.longitude}
+            />
           )
         }
       </Media>

@@ -40,7 +40,7 @@ class MobileView extends Component {
   render() {
     return (
       <div>
-        <Mountains isDay={this.props.isDay} />
+        <Mountains />
         <WeatherIcon icon={this.state.icon} type="weather-icon" />
         <Banner name={this.state.name} temp={this.state.temp} />
         <WeekView

@@ -19,7 +19,7 @@ export const getDayOfWeek = utcDate => {
   return days[utcDate.getDay()]
 }
 
-export const getHourOfDayFromEpoch = (epoch, getDate = true) => {
+export const getHourOfDayFromEpoch = epoch => {
   const date = getDateFromEpoch(epoch)
 
   const hours = [
@@ -51,4 +51,11 @@ export const getHourOfDayFromEpoch = (epoch, getDate = true) => {
   ]
 
   return hours[date.getHours()]
+}
+
+export const getExactTime = epoch => {
+  const date = getDateFromEpoch(epoch)
+  const hour = getHourOfDayFromEpoch(date).replace(/\D/g, '')
+  const minutes = date.getMinutes()
+  return `${hour}:${minutes}`
 }

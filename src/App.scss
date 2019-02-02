@@ -26,6 +26,10 @@ body {
   .banner {
     box-shadow: 0px 0px 18px 0px #92bad6;
   }
+
+  .daily-card-container {
+    box-shadow: 2px 5px 20px 1px #a0a0a0;
+  }
 }
 // End of Day Time Color Schema
 
@@ -41,6 +45,10 @@ body {
   // Night Banner Component CSS
   .banner {
     box-shadow: 0px 0px 18px 0px #153349;
+  }
+
+  .daily-card-container {
+    box-shadow: 0px 0px 18px 0px #1c1c1c;
   }
 }
 // End of Night Time Color Schema
@@ -111,31 +119,36 @@ body {
   }
 
   .hourly-container {
-    display: flex;
-    overflow: scroll;
     width: 98vw;
+  }
+}
 
-    .hourly-report {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-    }
+.hourly-container {
+  display: flex;
+  overflow: scroll;
+  width: 98%;
 
-    .sunrise,
-    .sunset {
-      font-size: 10px;
-    }
+  .hourly-report {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-    .temp {
-      font-size: 10px;
-      margin: 4px 0px 0px 5px;
-    }
+  .sunrise,
+  .sunset {
+    font-size: 10px;
+  }
 
-    .hour {
-      font-size: 12px;
-      width: 70px;
-    }
+  .temp {
+    font-size: 10px;
+    margin: 4px 0px 0px 5px;
+  }
+
+  .hour {
+    font-size: 12px;
+    width: 70px;
+    text-align: center;
   }
 }
 
@@ -162,5 +175,32 @@ body {
     border-radius: 5px;
     margin-top: 10px;
     padding: 10px 25px;
+  }
+}
+
+.desktop-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.daily-card-container {
+  width: 40%;
+  margin: 15px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5px;
+
+  header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+
+    h5 {
+      margin: 0px;
+    }
   }
 }

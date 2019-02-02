@@ -1,9 +1,14 @@
-import React, { Component } from 'react'
+import React from 'react'
+import DailyForecastCard from './DailyForecastCard'
 
-class Calendar extends Component {
-  render() {
-    return <div>Destop View Component</div>
-  }
+const Calendar = ({ weeklyForecast, latLong }) => {
+  return (
+    <div className="desktop-container">
+      {weeklyForecast.map((day, i) => (
+        <DailyForecastCard key={i} day={day} latLong={latLong} />
+      ))}
+    </div>
+  )
 }
 
 export default Calendar
