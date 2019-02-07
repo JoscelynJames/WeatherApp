@@ -41,26 +41,16 @@ class Calendar extends Component {
       }
     }
 
-    if (this.props.location.search) {
-      const zipcode = this.props.location.search.split('=')[1]
-      const { latitude, longitude } = zipcodes.lookup(zipcode)
-
-      this.setState({
-        accessGranted: true,
-        loading: true,
-        latitude,
-        longitude
-      })
-      this.fetchLocationInfo()
-    }
+    if (this.props.location.search) this.getLocationByZip()
   }
 
   geolocationDenied() {
     this.setState({ ...this.state, accessGranted: false, loading: false })
   }
 
-  getLocation() {
-    navigator.geolocation.getCurrentPosition(position => {
+  async getLocation() {
+    navigator.geolocation.getCurrentPosition((position, err) => {
+      if (err) return console.error(err)
       this.setState({
         ...this.state,
         latitude: position.coords.latitude,
@@ -83,6 +73,19 @@ class Calendar extends Component {
     })
 
     this.setTimeOfDay()
+  }
+
+  async getLocationByZip() {
+    const zipcode = this.props.location.search.split('=')[1]
+    const { latitude, longitude } = zipcodes.lookup(zipcode)
+
+    this.setState({
+      accessGranted: true,
+      loading: true,
+      latitude,
+      longitude
+    })
+    this.fetchLocationInfo()
   }
 
   setTimeOfDay() {

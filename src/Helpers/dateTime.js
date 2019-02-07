@@ -55,7 +55,7 @@ export const getHourOfDayFromEpoch = epoch => {
 
 export const getExactTime = epoch => {
   const date = getDateFromEpoch(epoch)
-  const hour = getHourOfDayFromEpoch(date).replace(/\D/g, '')
+  const hour = getHourOfDayFromEpoch(epoch).replace(/\D/g, '')
   const minutes = date.getMinutes()
-  return `${hour}:${minutes}`
+  return `${hour}:${minutes < 10 ? '0' + minutes : minutes}`
 }
